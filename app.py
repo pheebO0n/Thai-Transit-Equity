@@ -25,13 +25,13 @@ geojson = setup_geojson()
 
 # --- 1. หาจุดกึ่งกลางจังหวัด (แบบไม่ใช้ shapely) ---
 @st.cache_data
-def get_centroids(geojson_data):
+def get_centroids():
     centroids = {}
-    for feat in geojson_data["features"]:
+    # เรียกใช้ geojson จากด้านนอกได้เลย
+    for feat in geojson["features"]: 
         name = feat["properties"].get("name", "")
         if not name: continue
         
-        # ดึงพิกัดทั้งหมดของจังหวัดนั้นมาหาค่าเฉลี่ย
         coords = []
         def extract_coords(geom):
             if geom['type'] == 'Polygon':
@@ -49,7 +49,8 @@ def get_centroids(geojson_data):
             
     return centroids
 
-centroids = get_centroids(geojson)
+# เวลาเรียกใช้ ไม่ต้องใส่วงเล็บอะไรข้างใน
+centroids = get_centroids() 
 
 # --- 2. Mapping ชื่อจังหวัด TH -> EN ---
 TH_TO_EN = {
