@@ -1,0 +1,6 @@
+.venv/
+test_env/
+__pycache__/
+*.geojson
+*.csv
+.DS_Store

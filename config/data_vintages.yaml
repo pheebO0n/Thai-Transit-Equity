@@ -1,0 +1,63 @@
+defaults:
+  primary_data_year: 2567
+  strict_vintage: true
+
+vintages:
+  gpp:
+    2566:
+      report_year: 2568
+      source: NESDC Gross Provincial Product 2566 (published 2568)
+      data_status: actual
+      is_anchor: true
+    2567:
+      report_year: 2568
+      source: NESDC Gross Provincial Product 2567 (actual)
+      data_status: actual
+      is_anchor: false
+    2568:
+      report_year: 2569
+      source: NESDC Gross Provincial Product 2568 (preliminary estimate)
+      data_status: estimate
+      is_anchor: false
+
+  route_catalogue:
+    2568:
+      report_year: 2568
+      source: MOT / Department of Land Transport - route licensing register
+      data_status: actual
+      scope: Category-2 (209 routes) + Category-3 (627 routes)
+
+  route_frequency:
+    2568:
+      report_year: 2568
+      source: BorKorSor timetable, May 2568 edition
+      data_status: actual
+      scope: 59 interprovincial routes / 208 daily trips
+      coverage_ratio: 0.094
+
+  gtfs:
+    2564:
+      report_year: 2564
+      source: data.go.th GTFS feed (last updated 2021)
+      data_status: stale
+      max_age_months: 24
+
+gap_engine:
+  weights:
+    existence: 0.6
+    intensity: 0.4
+  existence_components:
+    has_category1: 0.4
+    has_category4: 0.3
+    has_category3_destination_count: 0.3
+  intensity_components:
+    avg_daily_trips_per_route: 0.45
+    total_daily_trips_departing: 0.35
+    operator_diversity_index: 0.20
+  min_destinations_for_full_score: 20
+  percentile_method: average
+
+geo:
+  country_crs: EPSG:4326
+  analysis_crs: EPSG:32647
+  analysis_crs_alt: EPSG:32648
